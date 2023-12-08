@@ -86,7 +86,7 @@ The loss of the final output was calculated using a two-part function:
 
 The first loss term represents the mean-squared error associated with the accuracy of the reconstruction of the final image. The second term is used to reward smoothness in the deformation field, to ensure continuity, where $\nabla{\phi}$ is approximated using finite differences. The two terms are weighted according a tuning parameter \lambda_{smooth}. 
 
-Parameters were learned using an Adam optimizer with L2 penalty $\lambda$ = 0.1. A grid search was performed to identify the optimal learning rate and $\lambda_{smooth}$. For both hyperparameter tuning and final training, the model was trained over 40 epochs. 
+Parameters were learned using an Adam optimizer with L2 penalty $\lambda$ = 0.1. A grid search was performed to identify the optimal learning rate and $\lambda_{smooth}$. For hyperparameter tuning, all models were run for 40 epochs. Final model training was run for a minimum of 5 epochs, stopping either after 40 epochs or  when the validation error for one epoch exceeded that of the previous.
 
 Models were trained using a subset of the data that only included the number 7. The test loss was then generated for two scenarios, one for mapping instances of the number 7 to the number 7, and one for mapping the number 4 to the number 4 in order to determine how generalizable the model is beyond its initial training set. 
 
