@@ -95,6 +95,11 @@ Models were trained using a subset of the data that only included the number 7. 
 \label{others}
 
 \section{Discussion}
+The model trained here has demonstrated some success in the image registration task, although not to the extent that the generated and target images are indistinguishable. The close tracking of the validation loss with the training loss suggests that future iterations of the model may benefit from a deeper architecture, larger network size, or longer training period.
+For the training case, one obstacle encountered was that there are two common variants of the number 7 – one with a crossbar, and one without. In all iterations of the training, the model struggled to generate a crossbar that was present in the target image, but not in the fixed image. This is to be expected by the nature of the problem setup – because the deformation process is continuous, it is difficult to invent new features in the final product that are not present in the original image. 
+Based on the average test loss, the model’s ability to generalize to numbers other than 7 was also dependent on the similarity between the two numbers. For example, the model struggled the most to register the number 6, likely because it is significantly less linear than 7, 1, or 4. Interestingly, on inspection, certain features were successfully deformed in the 6-dataset that would not have been present in the training data, such as the loop on the right-hand side. This suggests that the model’s ability to achieve a deformation was not limited to simple linear structures, and that the lack of generalizability has a more complex source.
+A final limitation for this project was that the hardware used was not sufficient to train moderately-sized models in a practical way, limiting the scope of the hyperparameter tuning. The original VoxelMorph model used a 12-layer CNN to estimate f, and was reported to train in “a few minutes”. For comparison, this model used a 6-layer network and was only able to train successfully over the course of several hours. 
+
 
 \bibliography{iclr2024_conference}
 \bibliographystyle{iclr2024_conference}
