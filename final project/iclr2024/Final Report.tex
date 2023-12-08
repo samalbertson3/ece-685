@@ -8,6 +8,7 @@
 \usepackage{hyperref}
 \usepackage{url}
 \usepackage{graphicx}
+\usepackage{natbib}
 
 
 \title{Image Registration Using the MNIST Dataset}
@@ -41,9 +42,9 @@ In this paper, a model is presented for deformable image registration using an a
 \end{abstract}
 
 \section{Introduction}
-Image registration is an important step in many medical imaging applications. Deformable image registration, where the shape of the image is allowed to be warped to achieve congruence between the initial and target images, is particularly useful in applications such as neuroimaging and organ segmentation, where images may represent cross-sections of volumes that shift in a 3-dimensional space. By mapping a deformation field from one image to another, annotated boundaries in one image can be mapped to their corresponding boundaries in different layers of a scanned volume, allowing for important clinical and research processes such as the 3-dimensional mapping of different organ systems, or the aggregation of multi-modal data into one aligned space.
+Image registration is an important step in many medical imaging applications. Deformable image registration, where the shape of the image is allowed to be warped to achieve congruence between the initial and target images, is particularly useful in applications such as neuroimaging and organ segmentation, where images may represent cross-sections of volumes that shift in a 3-dimensional space \cite{sheikhjafari_unsupervised_2022}. By mapping a deformation field from one image to another, annotated boundaries in one image can be mapped to their corresponding boundaries in different layers of a scanned volume, allowing for important clinical and research processes such as the 3-dimensional mapping of different organ systems, or the aggregation of multi-modal data into one aligned space.
 
-Previous deterministic algorithms for deformable image registration have been slow and computationally intensive, limiting their practical clinical application. By training a convolutional neural network (CNN) to approximate the deformation field between pairs of images, this field can be generated significantly faster by the VoxelMorph algorithm than older methods. Efficiency improvements not only provide for more convenient application for the user, but also allow models to be applied practically on much larger datasets, and in use cases where long runtimes present a barrier to deployment. 
+Previous deterministic algorithms for deformable image registration have been slow and computationally intensive, limiting their practical clinical application \cite{balakrishnan_voxelmorph_2019}. By training a convolutional neural network (CNN) to approximate the deformation field between pairs of images, this field can be generated significantly faster by the VoxelMorph algorithm than older methods. Efficiency improvements not only provide for more convenient application for the user, but also allow models to be applied practically on much larger datasets, and in use cases where long runtimes present a barrier to deployment \cite{manolis_kellis_deep_2021}. 
 
 In this paper, this approach is demonstrated using the MNIST dataset. This dataset, which is made up of 
 grayscale images of handwritten integers from 0 to 9, is both freely available and relatively lightweight, making it ideal for training on consumer-grade hardware. 
@@ -108,10 +109,12 @@ For the training case, one obstacle encountered was that there are two common va
 
 Based on the average test loss, the model’s ability to generalize to numbers other than 7 was also dependent on the similarity between the two numbers. For example, the model struggled the most to register the number 6, likely because it is significantly less linear than 7, 1, or 4. Interestingly, on inspection, certain features were successfully deformed in the 6-dataset that would not have been present in the training data, such as the loop on the right-hand side. This suggests that the model’s ability to achieve a deformation was not limited to simple linear structures, and that the lack of generalizability has a more complex source.
 
-A final limitation for this project was that the hardware used was not sufficient to train moderately-sized models in a practical way, limiting the scope of the hyperparameter tuning. The original VoxelMorph model used a 12-layer CNN to estimate f, and was reported to train in “a few minutes”. For comparison, this model used a 6-layer network and was only able to train successfully over the course of several hours. 
+A final limitation for this project was that the hardware used was not sufficient to train moderately-sized models in a practical way, limiting the scope of the hyperparameter tuning. The original VoxelMorph model used a 12-layer CNN to estimate $f$, and was reported to train in “a few minutes”. For comparison, this model used a 6-layer network and was only able to train successfully over the course of several hours. 
 
 
-\bibliography{iclr2024_conference}
 \bibliographystyle{iclr2024_conference}
+\bibliography{final_report_refs}
+
 
 \end{document}
+
