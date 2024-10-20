@@ -14,7 +14,7 @@ df = df.withColumn("z", col("x") * col("y"))
 z_df = df.select("z")
 
 # Write the 'z' column to a new CSV file
-z_df.write.csv("s3://your-bucket-name/output/z_column", header=True, mode="overwrite"
+z_df.write.csv("s3://your-bucket-name/output/z_column", header=True, mode="overwrite")
 
 # Stop the Spark session
 spark.stop()
