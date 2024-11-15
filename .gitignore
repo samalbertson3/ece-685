@@ -1,1 +1,2 @@
 pyspark_test/calc_data/*
+!pyspark_test/calc_data/.gitkeep
