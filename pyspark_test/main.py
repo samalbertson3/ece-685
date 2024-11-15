@@ -18,7 +18,7 @@ df = spark.read.csv("pyspark_test/data.csv", header=True, inferSchema=True)
 df = df.withColumn("z", col("x") * col("y"))
 
 # Write the 'z' column to a new CSV file
-df.write.csv("pyspark_test/calc_data", header=True, mode="overwrite")
+df.write.csv("pyspark_test/calc_data", header=True, mode="append")
 
 # Upload to S3
 s3 = boto3.client("s3")
