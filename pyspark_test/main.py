@@ -1,19 +1,29 @@
-from pyspark.sql import SparkSession
-
 # from pyspark.sql import SparkSession
-# from pyspark.sql.functions import col
+
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import col
+import platform
+
 # import boto3
 # import os
-#
-## Initialize Spark session
-spark = (
-    SparkSession.builder.appName("SumColumn").master("yarn")
-    #    .config("spark.driver.extraJavaOptions", "-Djava.security.manager=allow")
-    #    .config("spark.executor.extraJavaOptions", "-Djava.security.manager=allow")
-    .getOrCreate()
-)
 
-spark.sparkContext.parallelize(range(1)).map(lambda x: "Hello World!").collect()
+# Initialize Spark session
+if platform.system() == "Windows":
+    spark = (
+        SparkSession.builder.appName("SumColumn")
+        .config("spark.driver.extraJavaOptions", "-Djava.security.manager=allow")
+        .config("spark.executor.extraJavaOptions", "-Djava.security.manager=allow")
+        .getOrCreate()
+    )
+else:
+    spark = (
+        SparkSession.builder.appName("SumColumn").master("yarn")
+        #    .config("spark.driver.extraJavaOptions", "-Djava.security.manager=allow")
+        #    .config("spark.executor.extraJavaOptions", "-Djava.security.manager=allow")
+        .getOrCreate()
+    )
+
+# spark.sparkContext.parallelize(range(1)).map(lambda x: "Hello World!").collect()
 
 
 ## Read data from a CSV file
@@ -35,4 +45,4 @@ spark.sparkContext.parallelize(range(1)).map(lambda x: "Hello World!").collect()
 #    )
 #
 ## Stop the Spark session
-# spark.stop()
+spark.stop()
