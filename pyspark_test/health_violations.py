@@ -20,7 +20,8 @@ def calculate_red_violations(data_source, output_uri):
         data = [(1, 2), (3, 4), (5, 6)]
         df = spark.createDataFrame(data, ["num1", "num2"])
         df = df.withColumn("sum", col("num1") + col("num2"))
-        # df.write.option("header", "true").mode("overwrite").csv(output_uri)
+        output_fp = output_uri + "/test.csv"
+        df.write.option("header", "true").mode("overwrite").csv(output_fp)
 
         #             # Load the restaurant violation CSV data
         #             if data_source is not None:
