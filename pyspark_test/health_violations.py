@@ -4,7 +4,6 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import lit, col
 
 
-# def calculate_red_violations(data_source, output_uri, log_uri):
 def calculate_red_violations(data_source, output_uri):
     """
     Processes sample food establishment inspection data and queries the data to find the top 10 establishments
@@ -17,11 +16,6 @@ def calculate_red_violations(data_source, output_uri):
     with SparkSession.builder.appName(
         "Calculate Red Health Violations"
     ).getOrCreate() as spark:
-        # data = [(1, 2), (3, 4), (5, 6)]
-        # df = spark.createDataFrame(data, ["num1", "num2"])
-        # df = df.withColumn("sum", col("num1") + col("num2"))
-        # output_fp = output_uri + "/test.csv"
-        # df.write.option("header", "true").mode("overwrite").csv(output_fp)
 
         # Load the restaurant violation CSV data
         if data_source is not None:
@@ -39,17 +33,10 @@ def calculate_red_violations(data_source, output_uri):
         ORDER BY total_red_violations DESC LIMIT 10"""
         )
 
-        #             # Write the results to the specified output URI
-        #             top_red_violation_restaurants.write.option("header", "true").mode(
-        #                 "overwrite"
-        #             ).csv(output_uri)
-
-    #     with open("s3://samalbertson-test/error.txt", "w") as f:
-    #         f.write("All good!")
-    # except Exception as e:
-    #     # Write the error message to a text file
-    #     with open("s3://samalbertson-test/error.txt", "w") as f:
-    #         f.write(str(e))
+        # Write the results to the specified output URI
+        top_red_violation_restaurants.write.option("header", "true").mode(
+            "overwrite"
+        ).csv(output_uri)
 
 
 if __name__ == "__main__":
@@ -65,4 +52,3 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     calculate_red_violations(args.data_source, args.output_uri)
-    # calculate_red_violations(args.output_uri)
