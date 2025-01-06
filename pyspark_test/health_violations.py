@@ -5,7 +5,7 @@ from pyspark.sql.functions import lit, col
 
 
 # def calculate_red_violations(data_source, output_uri, log_uri):
-def calculate_red_violations():
+def calculate_red_violations(data_source, output_uri):
     """
     Processes sample food establishment inspection data and queries the data to find the top 10 establishments
     with the most Red violations from 2006 to 2020.
@@ -20,6 +20,7 @@ def calculate_red_violations():
         data = [(1, 2), (3, 4), (5, 6)]
         df = spark.createDataFrame(data, ["num1", "num2"])
         df = df.withColumn("sum", col("num1") + col("num2"))
+        # df.write.option("header", "true").mode("overwrite").csv(output_uri)
 
         #             # Load the restaurant violation CSV data
         #             if data_source is not None:
@@ -51,16 +52,16 @@ def calculate_red_violations():
 
 
 if __name__ == "__main__":
-    # parser = argparse.ArgumentParser()
-    # parser.add_argument(
-    #     "--data_source",
-    #     help="The URI for you CSV restaurant data, like an S3 bucket location.",
-    # )
-    # parser.add_argument(
-    #     "--output_uri",
-    #     help="The URI where output is saved, like an S3 bucket location.",
-    # )
-    # args = parser.parse_args()
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--data_source",
+        help="The URI for you CSV restaurant data, like an S3 bucket location.",
+    )
+    parser.add_argument(
+        "--output_uri",
+        help="The URI where output is saved, like an S3 bucket location.",
+    )
+    args = parser.parse_args()
 
-    # calculate_red_violations(args.data_source, args.output_uri)
-    calculate_red_violations()
+    calculate_red_violations(args.data_source, args.output_uri)
+    # calculate_red_violations(args.output_uri)
