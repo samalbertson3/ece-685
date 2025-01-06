@@ -23,9 +23,9 @@ def calculate_red_violations(data_source, output_uri):
         output_fp = output_uri + "/test.csv"
         df.write.option("header", "true").mode("overwrite").csv(output_fp)
 
-        #             # Load the restaurant violation CSV data
-        #             if data_source is not None:
-        #                 restaurants_df = spark.read.option("header", "true").csv(data_source)
+        # Load the restaurant violation CSV data
+        if data_source is not None:
+            restaurants_df = spark.read.option("header", "true").csv(data_source)
 
         #             # Create an in-memory DataFrame to query
         #             restaurants_df.createOrReplaceTempView("restaurant_violations")
